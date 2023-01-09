@@ -1,7 +1,7 @@
-import pyttsx3 #pip install pyttsx3
-import speech_recognition as sr #pip install speechRecognition
+import pyttsx3  # pip install pyttsx3
+import speech_recognition as sr  # pip install speechRecognition
 import datetime
-import wikipedia #pip install wikipedia
+import wikipedia  # pip install wikipedia
 import webbrowser
 import os
 import smtplib
@@ -19,19 +19,20 @@ def speak(audio):
 
 def wishMe():
     hour = int(datetime.datetime.now().hour)
-    if hour>=0 and hour<12:
+    if hour >= 0 and hour < 12:
         speak("Good Morning!")
 
-    elif hour>=12 and hour<18:
-        speak("Good Afternoon!")   
+    elif hour >= 12 and hour < 18:
+        speak("Good Afternoon!")
 
     else:
-        speak("Good Evening!")  
+        speak("Good Evening!")
 
-    speak("I am Jarvis Sir. Please tell me how may I help you")       
+    speak("I am Jarvis Sir. Please tell me how may I help you")
+
 
 def takeCommand():
-    #It takes microphone input from the user and returns string output
+    # It takes microphone input from the user and returns string output
 
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -40,15 +41,16 @@ def takeCommand():
         audio = r.listen(source)
 
     try:
-        print("Recognizing...")    
+        print("Recognizing...")
         query = r.recognize_google(audio, language='en-in')
         print(f"User said: {query}\n")
 
     except Exception as e:
-        # print(e)    
-        print("Say that again please...")  
+        # print(e)
+        print("Say that again please...")
         return "None"
     return query
+
 
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -58,10 +60,11 @@ def sendEmail(to, content):
     server.sendmail('codeninjaa28@gmail.com', to, content)
     server.close()
 
+
 if __name__ == "__main__":
     wishMe()
     while True:
-    # if 1:
+        # if 1:
         query = takeCommand().lower()
 
         # Logic for executing tasks based on query
@@ -80,17 +83,16 @@ if __name__ == "__main__":
             webbrowser.open("https://google.com/")
 
         elif 'open stackoverflow' in query:
-            webbrowser.open("https://stackoverflow.com/")   
-
+            webbrowser.open("https://stackoverflow.com/")
 
         elif 'play music' in query:
             music_dir = 'D:\\Non Critical\\songs\\Favorite Songs2'
             songs = os.listdir(music_dir)
-            print(songs)    
+            print(songs)
             os.startfile(os.path.join(music_dir, songs[0]))
 
         elif 'the time' in query:
-            strTime = datetime.datetime.now().strftime("%H:%M:%S")    
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"Sir, the time is {strTime}")
 
         elif 'open code' in query:
@@ -101,9 +103,15 @@ if __name__ == "__main__":
             try:
                 speak("What should I say?")
                 content = takeCommand()
-                to = "codeninjaa28@gmail.com"    
+                to = "codeninjaa28@gmail.com"
                 sendEmail(to, content)
                 speak("Email has been sent!")
             except Exception as e:
                 print(e)
-                speak("Sorry my friend. I am not able to send this email")    
+                speak("Sorry my friend. I am not able to send this email")
+
+        elif 'about artificial intelligence and machine learning' in query:
+            speak("Artificial intelligence (AI) refers to the ability of a computer or machine to perform tasks that require human-like intelligence, such as learning and problem-solving. Machine learning is a subfield of AI, this involves the development of algorithms that allow computers to learn and improve their performance over time without being explicitly programmed. AI and machine learning have many applications in various fields and are important and rapidly growing areas of computer science.")
+
+        elif 'difference between cse and ai ml' in query:
+            speak("Computer science engineering is a field of engineering that deals with the design and development of computer systems and their applications. It involves the use of computer science principles to design and build hardware and software systems, as well as to develop new technologies and applications. Artificial intelligence engineering is a field that focuses on the design and development of AI systems and applications. It involves the use of machine learning algorithms and other AI techniques to create intelligent systems that can perform tasks that normally require human intelligence.Machine learning engineering is a field that involves the application of machine learning algorithms and techniques to build and deploy predictive models and systems. It involves the use of data to train machine learning models and to improve their performance over time. In general, computer science engineering is a broader field that covers a wide range of topics, while artificial intelligence engineering and machine learning engineering are more specialized fields that focus on the development of AI and machine learning systems, respectively.")
