@@ -74,13 +74,13 @@ if __name__ == "__main__":
             speak(results)
 
         elif 'open youtube' in query:
-            webbrowser.open("youtube.com")
+            webbrowser.open("https://www.youtube.com/")
 
         elif 'open google' in query:
-            webbrowser.open("google.com")
+            webbrowser.open("https://google.com/")
 
         elif 'open stackoverflow' in query:
-            webbrowser.open("stackoverflow.com")   
+            webbrowser.open("https://stackoverflow.com/")   
 
 
         elif 'play music' in query:
